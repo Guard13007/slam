@@ -1,4 +1,4 @@
--- Simple LÖVE Audio Manager
+-- Simple LÃ–VE Audio Manager
 --
 -- Copyright (c) 2011 Matthias Richter
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -104,13 +104,13 @@ end
 
 function Source:addTags(tag, ...)
 	if not tag then return end
-	love.audio.tags[tag][self] = self
+	slam.audio.tags[tag][self] = self
 	return Source.addTags(self, ...)
 end
 
 function Source:removeTags(tag, ...)
 	if not tag then return end
-	love.audio.tags[tag][self] = nil
+	slam.audio.tags[tag][self] = nil
 	return Source.removeTags(self, ...)
 end
 
@@ -137,7 +137,7 @@ Source.isLooping = Source.getLooping
 --------------------------
 -- love.audio interface --
 --------------------------
-function love.audio.newSource(target, how)
+function slam.audio.newSource(target, how)
 	local s = {
 		_paused   = false,
 		target    = target,
@@ -150,16 +150,16 @@ function love.audio.newSource(target, how)
 	if how == 'static' and type(target) == 'string' then
 		s.target = love.sound.newSoundData(target)
 	end
-	love.audio.tags.all[s] = s
+	slam.audio.tags.all[s] = s
 	return setmetatable(s, Source)
 end
 
-function love.audio.play(source)
+function slam.audio.play(source)
 	assert(source and source.instances, "Can only play source objects.")
 	return source:play()
 end
 
-function love.audio.stop(source)
+function slam.audio.stop(source)
 	if source and source.stop then return source:stop() end
 	stop()
 end
@@ -178,7 +178,7 @@ function Tag:__index(func)
 	end
 end
 
-love.audio.tags = setmetatable({}, {
+slam.audio.tags = setmetatable({}, {
 	__newindex = error,
 	__index = function(t,k)
 		local tag = setmetatable({}, Tag)
