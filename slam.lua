@@ -37,7 +37,7 @@ Source.__newindex = function(_,k) error(('Cannot write key %s'):format(tostring(
 local function remove_stopped(sources)
 	local remove = {}
 	for s in pairs(sources) do
-		remove[s] = true
+		if (s:isStopped()) then remove[s] = true end
 	end
 	for s in pairs(remove) do
 		sources[s] = nil
