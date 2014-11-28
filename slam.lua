@@ -137,6 +137,8 @@ Source.isLooping = Source.getLooping
 --------------------------
 -- love.audio interface --
 --------------------------
+local slam = {}
+slam.audio = {}
 function slam.audio.newSource(target, how)
 	local s = {
 		_paused   = false,
@@ -186,3 +188,5 @@ slam.audio.tags = setmetatable({}, {
 		return tag
 	end,
 })
+
+return slam

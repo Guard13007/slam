@@ -1,11 +1,12 @@
-SLAM
-====
-... is the **Simple [LOVE] Audio Manager** formerly known as the **Benignly
-Designed Sound Manager.** It's a minimally invasive augmentation of [LOVE]'s
-audio module. In contrast to sources that can only have one simultaneous
-playing instance, SLAM sources create *instances* when played. This way you can
-play one source multiple times at once. Each instance will inherit the settings
-(volume, speed, looping, ...) of it's SLAM source, but can override them.
+SLAM (non-invasive version)
+===========================
+.. is the **Simple [LOVE] Audio Manager**.
+
+This version returns a table of functions you can use, instead of overwriting LOVE's functions.
+
+In contrast to sources that can only have one playing instance, SLAM sources create instances
+when played, so that you can play one source multiple times at once. Each instance will inherit
+the settings (volume, speed, looping, etc) of it's SLAM source, but can override them.
 
 SLAM also features tags, which can be used to modify a number of sources at the
 same time.
@@ -13,14 +14,14 @@ same time.
 Example
 -------
 
-    require 'slam'
+    local slam = require 'slam'
     function love.load()
-        music = love.audio.newSource('music.ogg', 'stream') -- creates a new SLAM source
+        music = slam.audio.newSource('music.ogg', 'stream') -- creates a new SLAM source
         music:setLooping(true)                              -- all instances will be looping
         music:setVolume(.3)                                 -- set volume for all instances
-        love.audio.play(music)                              -- play music
+        slam.audio.play(music)                              -- play music
         
-        woosh = love.audio.newSource({'woosh1.ogg', 'woosh2.ogg'}, 'static')
+        woosh = slam.audio.newSource({'woosh1.ogg', 'woosh2.ogg'}, 'static')
     end
     
     function love.keypressed()
@@ -34,7 +35,7 @@ Reference
 
 ### Operations on Sources
 
-    source = love.audio.newSource(what, how)
+    source = slam.audio.newSource(what, how)
 
 Returns a new SLAM source. Accepts the same parameters as
 [love.audio.newSource](http://love2d.org/wiki/love.audio.newSource), with one
@@ -42,7 +43,7 @@ major difference: `what` can be a table, in which case each new playing
 instance will pick an item of that table at random.
 
 
-    instance = love.audio.play(source)
+    instance = slam.audio.play(source)
     instance = source:play()
 
 Plays a source, removes all paused instances and returns a handle to the player
@@ -50,13 +51,13 @@ instance. Instances will inherit the settings (looping, pitch, volume) of
 `source`.
 
 
-    love.audio.stop(source)
+    slam.audio.stop(source)
     source:stop()
 
 Stops all playing instances of a source.
 
 
-    love.audio.stop()
+    slam.audio.stop()
 
 Stops all playing instances.
 
@@ -93,17 +94,17 @@ details on the parameters, see the [LOVE wiki](http://love2d.org/wiki/Source).
 All functions that affect LOVE Sources can be applied to SLAM instances. These
 are:
 
-    love.audio.pause(instance)
+    slam.audio.pause(instance)
     instance:pause()
     instance:isPaused()
     
-    love.audio.play(instance)
+    slam.audio.play(instance)
     instance:play()
     
-    love.audio.resume(instance)
+    slam.audio.resume(instance)
     instance:resume()
     
-    love.audio.rewind(instance)
+    slam.audio.rewind(instance)
     instance:rewind()
     
     instance:getDirection()
@@ -141,8 +142,8 @@ A simple example:
     
     (...)
     
-    love.audio.tags.background.setVolume(0) -- mute all background sounds
-    love.audio.tags.music.setVolume(.1)     -- ... but keep the music alive
+    slam.audio.tags.background.setVolume(0) -- mute all background sounds
+    slam.audio.tags.music.setVolume(.1)     -- ... but keep the music alive
 
 
 #### Functions
@@ -158,8 +159,8 @@ tag `all`.
 Remove one or more tags from a source.
 
 
-    love.audio.tags.TAG.FUNCTION(...)
-    love.audio.tags[TAG].FUNCTION(...)
+    slam.audio.tags.TAG.FUNCTION(...)
+    slam.audio.tags[TAG].FUNCTION(...)
 
 Calls `FUNCTION` on all sources tagged with `TAG`.
 
