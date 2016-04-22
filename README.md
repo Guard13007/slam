@@ -2,6 +2,11 @@ SLAM (non-invasive version)
 ===========================
 .. is the **Simple [LOVE] Audio Manager**.
 
+[![GitHub release](https://img.shields.io/github/release/Guard13007/slam.svg?maxAge=2592000)](https://github.com/Guard13007/slam/releases/latest)
+[![GitHub downloads](https://img.shields.io/github/downloads/Guard13007/slam/latest/total.svg?maxAge=2592000)](https://github.com/Guard13007/slam/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues-raw/Guard13007/slam.svg?maxAge=2592000)](https://github.com/Guard13007/slam/issues)
+![GitHub license](https://img.shields.io/badge/license-MIT%20License-blue.svg?maxAge=2592000)
+
 This version returns a table of functions you can use, instead of overwriting LOVE's functions.
 
 In contrast to sources that can only have one playing instance, SLAM sources create instances
