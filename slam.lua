@@ -23,6 +23,7 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 -- THE SOFTWARE.
 --
+-- (Modified by Guard13007 to remove global state modification.)
 
 local newInstance = love.audio.newSource
 local stop = love.audio.stop
